@@ -18,13 +18,6 @@ I've created a demo app that demonstrates how both forms of a Context component 
 
 [CodeSandbox Demo](https://codesandbox.io/s/flamboyant-cdn-y1knl?file=/README.md)
 
-<iframe src="https://codesandbox.io/embed/flamboyant-cdn-y1knl?fontsize=14&hidenavigation=1&theme=dark"
-     style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
-     title="flamboyant-cdn-y1knl"
-     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-   ></iframe>
-
 This solution isn't really feasible for RBS so the first option listed of splitting contexts that aren't related is probably the way to go. We do this, but this just affirms that.
 
 ## RBS Docs
