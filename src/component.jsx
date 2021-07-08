@@ -1,4 +1,4 @@
-import { useContext, useState, useMemo, memo } from "react";
+import { useContext, useState, useMemo } from "react";
 
 export function Component(props) {
   const [log, setLog] = useState(false);

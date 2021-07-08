@@ -7,6 +7,7 @@ export default function App() {
   return (
     <div className="App">
       <h1>React Context: Class vs. Function</h1>
+      <p>Open console below to see logged messages</p>
       <div className="Demo">
         <Demo displayName="ClassBased" context={ClassBased} />
         <Demo displayName="FunctionBased" context={FunctionBased} />
