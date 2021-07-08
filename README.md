@@ -7,11 +7,9 @@ We are running off the assumption that creating context as class components prev
 This is not the case. Changing any part of the state in a context causes a re-render of any child component using that state, no matter whether the context component is created as a class or function.
 
 This is an old issue with much discussion:
-
 [Provide more ways to bail out inside Hooks #14110](https://github.com/facebook/react/issues/14110)
 
 This issue comment provides three ways to work around it:
-
 [Preventing rerenders with React.memo and useContext hook. #15156](https://github.com/facebook/react/issues/15156#issuecomment-474590693)
 
 I've created a demo app that demonstrates how both forms of a Context component cause the same re-renders and also how the `useMemo` solution works for either one.
