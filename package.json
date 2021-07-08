@@ -1,7 +1,7 @@
 {
-  "name": "class-vs-functional-context",
+  "name": "react-class-vs-function-context",
   "version": "1.0.0",
-  "description": "",
+  "description": "Answering the question \"Does creating context as a class prevents re-renders of children who do not use the part of state that changed?",
   "keywords": [],
   "main": "src/index.jsx",
   "dependencies": {
@@ -19,5 +19,10 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"]
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
