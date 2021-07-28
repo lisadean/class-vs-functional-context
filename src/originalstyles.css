@@ -1,0 +1,15 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.Demo {
+  text-align: initial;
+  padding: 0 3em;
+}
+
+.component {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}

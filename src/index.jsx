@@ -39,34 +39,34 @@ const ContextItemComponent = ({ context, contextItemName }) => {
   );
 };
 
-export const ComponentWrapper = (props) => <div>{props.children}</div>;
+export const ComponentWrapper = (props) => (
+  <div style={{ border: '5px solid black', padding: '0.5em' }}>
+    {props.children}
+  </div>
+);
 
 const App = () => (
   <div className='App'>
-    <h1>React Context: Class vs. Function</h1>
-    <div className='Demo'>
-      <h2>Context Demo</h2>
-      <Provider>
+    <Provider>
+      <ComponentWrapper>
         <ComponentWrapper>
           <ComponentWrapper>
-            <ComponentWrapper>
-              <div className='component'>
-                <div>
-                  <ContextItemComponent
-                    context={Context}
-                    contextItemName='stuff'
-                  />
-                  <ContextItemComponent
-                    context={Context}
-                    contextItemName='things'
-                  />
-                </div>
+            <div className='component'>
+              <div>
+                <ContextItemComponent
+                  context={Context}
+                  contextItemName='stuff'
+                />
+                <ContextItemComponent
+                  context={Context}
+                  contextItemName='things'
+                />
               </div>
-            </ComponentWrapper>
+            </div>
           </ComponentWrapper>
         </ComponentWrapper>
-      </Provider>
-    </div>
+      </ComponentWrapper>
+    </Provider>
   </div>
 );
 
