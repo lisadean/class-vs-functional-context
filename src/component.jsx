@@ -1,30 +1,76 @@
-import { useContext, useState, useMemo } from "react";
+import { useContext, useState, useMemo } from 'react';
 
-export function Component(props) {
+const capitalize = (word) => {
+  return word[0].toUpperCase() + word.slice(1).toLowerCase();
+};
+
+const SubComponent = ({
+  displayName,
+  context,
+  log,
+  memoized,
+  contextItem: contextItemName,
+}) => {
+  let contextData, setContextData;
+  if (contextItemName === 'stuff') {
+    ({ stuff: contextData, setStuff: setContextData } = useContext(context));
+  } else if (contextItemName === 'things') {
+    ({ things: contextData, setThings: setContextData } = useContext(context));
+  }
+  const label = capitalize(contextItemName);
+  const logString = `${displayName} ${label} rendered: ${contextData}`;
+  const handleClick = () => {
+    setContextData(Date.now());
+  };
+  const regular = () => {
+    log && console.log(logString);
+    return (
+      <div>
+        <div>
+          {label}:
+          <br />
+          {contextData}
+        </div>
+        <div>
+          <button onClick={handleClick}>Change {label.toLowerCase()}</button>
+        </div>
+      </div>
+    );
+  };
+  const memoizedVersion = useMemo(regular, [
+    contextData,
+    setContextData,
+    log,
+    logString,
+  ]);
+  return memoized ? memoizedVersion : regular();
+};
+
+export const BaseComponent = ({ displayName, context }) => {
   const [log, setLog] = useState(false);
   const [memoized, setMemoized] = useState(false);
-  const newprops = { ...props, log, memoized };
+  const newprops = { displayName, context, log, memoized };
   return (
-    <div className="component">
+    <div className='component'>
       <div>
-        <Stuff {...newprops} />
-        <Things {...newprops} />
+        <SubComponent {...newprops} contextItem='stuff' />
+        <SubComponent {...newprops} contextItem='things' />
       </div>
       <div>
         <div>
-          <label htmlFor="log">Toggle console log </label>
+          <label htmlFor='log'>Toggle console log </label>
           <input
-            type="checkbox"
-            name="log"
+            type='checkbox'
+            name='log'
             value={log}
             onChange={() => setLog(!log)}
           />
         </div>
         <div>
-          <label htmlFor="memoized">Toggle memoization </label>
+          <label htmlFor='memoized'>Toggle memoization </label>
           <input
-            type="checkbox"
-            name="memoized"
+            type='checkbox'
+            name='memoized'
             value={memoized}
             onChange={() => setMemoized(!memoized)}
           />
@@ -32,88 +78,18 @@ export function Component(props) {
       </div>
     </div>
   );
-}
-
-const Stuff = (props) => {
-  const { stuff, setStuff } = useContext(props.context);
-  const logString = `${props.displayName} Stuff rendered: ${stuff}`;
-  const regular = () => {
-    const handleClick = () => {
-      setStuff(Date.now());
-    };
-    props.log && console.log(logString);
-    return (
-      <div>
-        <div>
-          Stuff:
-          <br />
-          {stuff}
-        </div>
-        <div>
-          <button onClick={handleClick}>Change stuff</button>
-        </div>
-      </div>
-    );
-  };
-  const memoized = useMemo(() => {
-    const handleClick = () => {
-      setStuff(Date.now());
-    };
-    props.log && console.log(logString);
-    return (
-      <div>
-        <div>
-          Stuff:
-          <br />
-          {stuff}
-        </div>
-        <div>
-          <button onClick={handleClick}>Change stuff</button>
-        </div>
-      </div>
-    );
-  }, [stuff, setStuff, props.log, logString]);
-  return props.memoized ? memoized : regular();
 };
 
-const Things = (props) => {
-  const { things, setThings } = useContext(props.context);
-  const logString = `${props.displayName} Things rendered: ${things}`;
-  const regular = () => {
-    const handleClick = () => {
-      setThings(Date.now());
-    };
-    props.log && console.log(logString);
-    return (
-      <div>
-        <div>
-          Things:
-          <br />
-          {things}
-        </div>
-        <div>
-          <button onClick={handleClick}>Change things</button>
-        </div>
-      </div>
-    );
-  };
-  const memoized = useMemo(() => {
-    const handleClick = () => {
-      setThings(Date.now());
-    };
-    props.log && console.log(logString);
-    return (
-      <div>
-        <div>
-          Things:
-          <br />
-          {things}
-        </div>
-        <div>
-          <button onClick={handleClick}>Change things</button>
-        </div>
-      </div>
-    );
-  }, [things, setThings, props.log, logString]);
-  return props.memoized ? memoized : regular();
-};
+export const ComponentWrapper = (props) => <div>{props.children}</div>;
+
+// export const DeeplyNestedComponent = (props) => {
+//   const { nestingLevel, ...newProps } = props;
+//   if (nestingLevel <= 0) {
+//     return <BaseComponent props={newProps} />;
+//   } else {
+//     const newNestingLevel = nestingLevel - 1;
+//     return (
+//       <DeeplyNestedComponent nestingLevel={newNestingLevel} {...newProps} />
+//     );
+//   }
+// };
