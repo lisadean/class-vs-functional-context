@@ -57,10 +57,12 @@ const App = () => (
                   context={Context}
                   contextItemName='stuff'
                 />
-                <ContextItemComponent
-                  context={Context}
-                  contextItemName='things'
-                />
+                <ComponentWrapper>
+                  <ContextItemComponent
+                    context={Context}
+                    contextItemName='things'
+                  />
+                </ComponentWrapper>
               </div>
             </div>
           </ComponentWrapper>
